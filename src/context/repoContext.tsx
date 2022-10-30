@@ -1,13 +1,17 @@
 import { createContext, useContext } from "react";
 
+export interface IndividualRepo {
+  [key: string]: any;
+}
+
 export type RepoContent = {
-  repos: []
-  setRepos: (r: []) => void
+  repos: IndividualRepo
+  setRepos: (repo: IndividualRepo) => void
 };
 
 export const RepoContext = createContext<RepoContent>({
   repos: [],
-  setRepos: () => []
+  setRepos: () => {}
 });
 
 export const useRepoContext = () => useContext(RepoContext);

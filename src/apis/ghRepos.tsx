@@ -1,19 +1,19 @@
 import axios from 'axios';
 
 interface ApiProps {
-  searchQuery: string
+  query: string
 }
 
 const baseUrl = 'https://api.github.com/search/repositories'
 // https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}
 
-export const getReposApi = async ({searchQuery}: ApiProps): Promise<Array<[]> | void> => {
+export const getReposApi = async ({query}: ApiProps): Promise<Array<[]> | void> => {
   try {
-    const res = await axios.get(`${baseUrl}?q=${searchQuery}`);
-    console.log('gh repo results:', res);
-    
-    return res.data.items
-  } catch (error) {
-    console.log('error:', error);
+    const res: any = await axios.get(`${baseUrl}?q=${query}`);
+    console.log('res in api:', res);
+    return res;
+  } catch (error: any) {
+    console.log('error in api:', error);
+    return error;
   }
 }
