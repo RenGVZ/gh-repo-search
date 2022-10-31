@@ -3,7 +3,7 @@ import { RepoContext, IndividualRepo } from './context/repoContext';
 import Wrapper from './components/Wrapper';
 import { SearchBar } from './components/SearchBar';
 import { RepoList } from './components/RepoList';
-import './App.css';
+import './App.scss';
 
 const App = () => {
   const [repos, setRepos] = useState<IndividualRepo>([])

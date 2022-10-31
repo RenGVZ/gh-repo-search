@@ -38,7 +38,7 @@ const SearchBar = () => {
           setErrorMessage('error in search:');
         }
       }
-    }, 700)
+    }, 300)
   }
 
   useEffect(() => {
@@ -60,6 +60,7 @@ const SearchBar = () => {
           type="text"
           onChange={handleChange}
           ref={searchRef}
+          placeholder="Search for any GitHub repository..."
         />
       </div>
     </>
