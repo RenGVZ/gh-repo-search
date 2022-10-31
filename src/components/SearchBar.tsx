@@ -22,7 +22,7 @@ const SearchBar = () => {
     isThrottling.current = true;
     setTimeout(async () => {
       isThrottling.current = false;
-      const res: any = await getReposApi({query: searchQuery});
+      const res: any = await getReposApi({query: searchQuery, page_number: 1});
       if(res?.data?.items) {
         console.log('success in search:', res);
         const fetchedRepos = res.data.items;

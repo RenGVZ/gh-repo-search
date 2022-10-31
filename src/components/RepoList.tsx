@@ -33,7 +33,10 @@ const Repo = ({
       </div>
       <div className="mid">
         <p>{description}</p>
-        <p>Language: {language}</p>
+        <div>
+          <p>Language: {language}</p>
+          <p>Stars: {watchers}</p>
+        </div>
       </div>
       <div className="bottom">
         <p className="created">Created: {created_at.slice(0, 10)}</p>

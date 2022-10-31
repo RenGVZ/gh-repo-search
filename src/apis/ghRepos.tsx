@@ -1,15 +1,21 @@
 import axios from 'axios';
 
 interface ApiProps {
-  query: string
+  query: string;
+  page_number: number;
 }
 
 const baseUrl = 'https://api.github.com/search/repositories'
 // https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}
 
-export const getReposApi = async ({query}: ApiProps): Promise<Array<[]> | void> => {
+export const getReposApi = async ({query, page_number}: ApiProps): Promise<Array<[]> | void> => {
   try {
-    const res: any = await axios.get(`${baseUrl}?q=${query}`);
+    const config = {
+      headers: {
+        "Accept": "application/vnd.github+json"
+      }
+    }
+    const res: any = await axios.get(`${baseUrl}?q=${query}&sort=stars&per_page=5&page=${page_number}`, config);
     console.log('res in api:', res);
     return res;
   } catch (error: any) {
