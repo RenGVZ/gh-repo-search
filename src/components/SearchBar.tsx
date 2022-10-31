@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { getReposApi } from '../apis/ghRepos';
 import { useRepoContext } from '../context/repoContext';
+import { useQueryContext } from '../context/queryContext';
 
 const SearchBar = () => {
   const { setRepos } = useRepoContext();
+  const { setQuery } = useQueryContext();
   const searchRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const isThrottling = useRef(false);
   const [errors, setErrors] = useState<boolean>(false);
@@ -22,6 +24,7 @@ const SearchBar = () => {
     isThrottling.current = true;
     setTimeout(async () => {
       isThrottling.current = false;
+      setQuery(searchQuery);
       const res: any = await getReposApi({query: searchQuery, page_number: 1});
       if(res?.data?.items) {
         console.log('success in search:', res);

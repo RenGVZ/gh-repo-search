@@ -48,7 +48,6 @@ const Repo = ({
 
 const RepoList = () => {
   const { repos } = useRepoContext();
-  console.log('repos in repolist:', repos);
 
   return (
     <>
