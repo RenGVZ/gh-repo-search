@@ -5,40 +5,58 @@
   flex-direction: column;
   align-items: center;
   margin: 5vh 0vw;
+  color: rgb(48, 48, 114);
 }
 
 .search-bar-container {
   position: relative;
   width: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   input {
     width: 70%;
     padding: 12px;
     border: 2px solid #b6b6b6;
     border-radius: 25px;
     font-size: 18px;
+    box-shadow: 12px 12px 2px 1px rgb(0 0 255 / 20%);
     &:focus {
       outline: 2px solid rgba(0, 0, 255, 0.124);
       border: 2px solid transparent;
       color: rgba(25, 25, 109, 0.631);
-      box-shadow: 12px 12px 2px 1px rgb(0 0 255 / 20%)
     }
   }
-  .error-message {
-    position: absolute;
-    top: -45px;
-    font-size: 12px;
-    background-color: #ffa9a9;
-    color: white;
-    padding: 0px 10px;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    height: 35px;
-    align-items: center;
-    border-radius: 5px;
-  }
+}
+
+.pagination-error {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.searchbar-error {
+  position: absolute;
+  top: -35px;
+  display: flex;
+  justify-content: center;
+  height: fit-content
+}
+
+.error-message {
+  font-size: 12px;
+  background-color: #ffa9a9;
+  color: white;
+  padding: 0px 10px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  height: 35px;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .repos-list {
@@ -86,17 +104,55 @@
   }
 }
 
+.pagination-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: fixed;
+  bottom: 2vh;
+  gap: 50px;
+  .pagination-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 150px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 255, .2);
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(48, 48, 114);
+      color: white;
+    }
+  }
+}
+
 @media (max-width: 900px) {
   .search-bar-container {
     width: 100%;
+    input {
+      font-size: 14px;
+    }
   }
   .repos-list {
     width: 100%;
     .top {
       flex-direction: column;
+      .name-wrapper {
+        font-size: 12px;
+      }
       .owner {
         justify-content: flex-start;
       }
+    }
+  }
+  .pagination-container {
+    gap: 20px;
+    .pagination-control {
+      width: 90px;
     }
   }
 }

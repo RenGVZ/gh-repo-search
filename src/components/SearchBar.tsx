@@ -2,10 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import { getReposApi } from '../apis/ghRepos';
 import { useRepoContext } from '../context/repoContext';
 import { useQueryContext } from '../context/queryContext';
+import ErrorBar from './ErrorBar';
 
 const SearchBar = () => {
-  const { setRepos } = useRepoContext();
-  const { setQuery } = useQueryContext();
+  const { setRepos, setTotalCount } = useRepoContext();
+  const { setQuery, setCurrentPage } = useQueryContext();
   const searchRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const isThrottling = useRef(false);
   const [errors, setErrors] = useState<boolean>(false);
@@ -22,12 +23,15 @@ const SearchBar = () => {
       return;
     }
     isThrottling.current = true;
+    // throttling data for 300ms here to prevent overuse of api
     setTimeout(async () => {
       isThrottling.current = false;
       setQuery(searchQuery);
+      setCurrentPage(1);
       const res: any = await getReposApi({query: searchQuery, page_number: 1});
       if(res?.data?.items) {
         console.log('success in search:', res);
+        setTotalCount(res.data.total_count)
         const fetchedRepos = res.data.items;
         setRepos(() => fetchedRepos);
       } else {
@@ -44,6 +48,7 @@ const SearchBar = () => {
     }, 300)
   }
 
+  // clear error message after 6 seconds
   useEffect(() => {
     setTimeout(() => {
       setErrors(false)
@@ -55,8 +60,8 @@ const SearchBar = () => {
     <>
       <div className="search-bar-container">
         {errors && (
-          <div className="error-message">
-            <p>{errorMessage}</p>
+          <div className="searchbar-error">
+            <ErrorBar message={errorMessage} />
           </div>
         )}
         <input

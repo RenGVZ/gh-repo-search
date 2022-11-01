@@ -10,14 +10,13 @@ interface RepoProps {
   };
   description?: string;
   created_at: string;
-  forks_count?: number;
   language?: string;
   svn_url: string;
   watchers?: number;
 }
 
 const Repo = ({
-  id, name, owner, description, created_at, forks_count, language, svn_url, watchers
+  id, name, owner, description, created_at, language, svn_url, watchers
 }: RepoProps) => {
   return (
     <>
@@ -60,7 +59,6 @@ const RepoList = () => {
               owner={repo.owner}
               description={repo.description}
               created_at={repo.created_at}
-              forks_count={repo.forks_count}
               language={repo.language}
               svn_url={repo.svn_url}
               watchers={repo.watchers}

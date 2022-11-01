@@ -16,7 +16,6 @@ export const getReposApi = async ({query, page_number}: ApiProps): Promise<Array
       }
     }
     const res: any = await axios.get(`${baseUrl}?q=${query}&sort=stars&per_page=5&page=${page_number}`, config);
-    // console.log('res in api:', res);
     return res;
   } catch (error: any) {
     console.log('error in api:', error);

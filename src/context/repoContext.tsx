@@ -5,13 +5,17 @@ export interface IndividualRepo {
 }
 
 export type RepoContent = {
-  repos: IndividualRepo
-  setRepos: (repo: IndividualRepo) => void
+  repos: IndividualRepo,
+  setRepos: (repo: IndividualRepo) => void,
+  totalCount: number,
+  setTotalCount: (tc: number) => void
 };
 
 export const RepoContext = createContext<RepoContent>({
   repos: [],
-  setRepos: () => {}
+  setRepos: () => {},
+  totalCount: 0,
+  setTotalCount: () => {}
 });
 
 export const useRepoContext = () => useContext(RepoContext);
